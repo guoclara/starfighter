@@ -32,6 +32,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
         
         private int timer;
+        private int score;
 
 	public OuterSpace()
 	{
@@ -54,6 +55,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
                 }
                 for(int i = 0; i <= 7; i++){
                     horde.add(new Alien(100 + i*100, 100, 50, 50, 2));
+                }
+                for(int i = 0; i <= 7; i++){
+                    horde.add(new Alien(100 + i*100, 200, 50, 50, 2));
                 }
 
 		this.addKeyListener(this);
@@ -107,7 +111,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		}
                 if(keys[4] == true)
 		{
-                    timer = 0;
+                    if(timer>=50){    
+                        timer = 0;
+                        shots.add(new Ammo(ship.getX()*49/43, ship.getY(), 5));
+                    }
                         
 		}
                 ship.draw(graphToBack);
@@ -119,7 +126,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
                 shots.moveEmAll();
                 shots.cleanEmUp();
                 timer++;
-		//add code to move Ship, Alien, etc.
+                horde.removeDeadOnes(shots.getList());
 
                 
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship

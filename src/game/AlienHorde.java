@@ -52,6 +52,13 @@ public class AlienHorde
 
 	public void removeDeadOnes(List<Ammo> shots)
 	{
+            for(Ammo sh: shots){
+                for(int i = 0; i<aliens.size(); i++){
+                    if(sh.getY() <= aliens.get(i).getY()+aliens.get(i).getHeight()&& sh.getY()>=aliens.get(i).getY() && sh.getX()>=aliens.get(i).getX() && sh.getX()<=aliens.get(i).getX()+aliens.get(i).getWidth()){
+                        aliens.remove(i);
+                    }
+                }
+            }
 	}
 
 	public String toString()
